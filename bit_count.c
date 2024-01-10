@@ -3,7 +3,7 @@
 unsigned int bit_count(long value) {
 #ifdef __GNUC__
     // Use GCC built-in
-    return __builtin_popcountl(labs(value));
+    return __builtin_popcountl(value);
 #else
     // Fallback method for compilers without the built-in
     unsigned int count = 0;
@@ -18,7 +18,7 @@ unsigned int bit_count(long value) {
 // Wrapper function for Ruby
 VALUE rb_bit_count(VALUE self) {
     long value = NUM2LONG(self);
-    unsigned int count =  bit_count(value);
+    unsigned int count =  bit_count(labs(value));
     return UINT2NUM(count);
 }
 
